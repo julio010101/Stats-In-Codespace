@@ -1,0 +1,65 @@
+name: Validate DevContainer
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.devcontainer/**'
+      - 'requirements.txt'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.devcontainer/**'
+      - 'requirements.txt'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate devcontainer.json
+      run: |
+        if [ -f .devcontainer/devcontainer.json ]; then
+          echo "✅ devcontainer.json found"
+          # Validate JSON syntax
+          python -m json.tool .devcontainer/devcontainer.json > /dev/null && echo "✅ Valid JSON syntax" || exit 1
+        else
+          echo "❌ devcontainer.json not found"
+          exit 1
+        fi
+        
+    - name: Validate setup script
+      run: |
+        if [ -f .devcontainer/setup.sh ]; then
+          echo "✅ setup.sh found"
+          # Check if executable
+          if [ -x .devcontainer/setup.sh ]; then
+            echo "✅ setup.sh is executable"
+          else
+            echo "❌ setup.sh is not executable"
+            exit 1
+          fi
+        else
+          echo "❌ setup.sh not found"
+          exit 1
+        fi
+        
+    - name: Validate requirements.txt
+      run: |
+        if [ -f requirements.txt ]; then
+          echo "✅ requirements.txt found"
+          # Check if file is not empty
+          if [ -s requirements.txt ]; then
+            echo "✅ requirements.txt is not empty"
+            cat requirements.txt
+          else
+            echo "❌ requirements.txt is empty"
+            exit 1
+          fi
+        else
+          echo "❌ requirements.txt not found"
+          exit 1
+        fi
