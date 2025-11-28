@@ -1,3 +1,61 @@
+## **ClickHouse + Iris (Quick Setup)**
+- **Objetivo:** Instalar o ClickHouse localmente e carregar o dataset `Iris` em uma tabela para consultas rápidas.
+
+- **Instalação (Ubuntu/Codespaces):**
+```bash
+sudo apt update
+sudo apt install -y clickhouse-server clickhouse-client
+sudo service clickhouse-server start
+# Verificar se está rodando
+clickhouse-client --query "SELECT version()"
+```
+
+- **Baixar o dataset Iris (CSV):**
+```bash
+mkdir -p data && cd data
+curl -L -o iris.csv https://archive.ics.uci.edu/static/public/53/iris.zip
+unzip iris.zip && mv Iris.csv iris.csv
+cd -
+```
+
+- **Criar a tabela `iris` no ClickHouse:**
+```sql
+-- Abra o cliente: clickhouse-client
+CREATE TABLE IF NOT EXISTS iris (
+   sepal_length Float32,
+   sepal_width  Float32,
+   petal_length Float32,
+   petal_width  Float32,
+   species LowCardinality(String)
+) ENGINE = MergeTree
+ORDER BY (species, sepal_length);
+```
+
+- **Carregar o CSV (delimitador por vírgula):**
+```bash
+clickhouse-client --query "INSERT INTO iris FORMAT CSV" < data/iris.csv
+```
+
+- **Consultas de verificação:**
+```bash
+clickhouse-client --query "SELECT COUNT(*) FROM iris"
+clickhouse-client --query "SELECT species, avg(petal_length) AS avg_pl FROM iris GROUP BY species ORDER BY avg_pl DESC"
+```
+
+- **Dicas:**
+ - Se o CSV tiver cabeçalho, use `FORMAT CSVWithNames`.
+ - Para uso via Python, instale `clickhouse-driver` (opcional):
+```bash
+pip install "clickhouse-driver[numpy]"
+```
+ - Exemplo de conexão rápida em Python:
+```python
+from clickhouse_driver import Client
+client = Client('localhost')
+rows = client.execute("SELECT species, avg(petal_length) FROM iris GROUP BY species")
+print(rows)
+```
+
 # Guia de Início Rápido
 
 ## 🎯 Objetivo
