@@ -2,7 +2,7 @@
 
 ## 🎯 Objetivo
 
-Este guia ajudará você a começar rapidamente com o ambiente de estatística usando Jupyter Notebook com R no GitHub Codespaces.
+Este guia ajudará você a começar rapidamente com o ambiente de estatística usando Jupyter Notebook com SQL + Clickhouse no GitHub Codespaces.
 
 ## ⚡ Início Rápido (5 minutos)
 

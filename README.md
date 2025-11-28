@@ -3,7 +3,7 @@ Ambiente de laboratório para aulas de estatística e ciência de dados via Jupy
 
 ## 📊 Sobre
 
-Este repositório fornece um ambiente completo de desenvolvimento para estatística e ciência de dados usando **Jupyter Notebook** com suporte ao **R** no **VS Code** através do **GitHub Codespaces**.
+Este repositório fornece um ambiente de desenvolvimento para estatística e ciência de dados usando **Jupyter Notebook** com suporte ao **R**, ao **Python** e SGBD **ClickHouse** no **VS Code** através do **GitHub Codespaces**.
 
 ## 🚀 Como Usar
 
@@ -43,8 +43,8 @@ Se preferir trabalhar localmente, você precisará ter o Docker instalado:
 
 1. Abra ou crie um arquivo `.ipynb`
 2. Clique em **Select Kernel** no canto superior direito
-3. Escolha **R** como kernel
-4. Comece a escrever código R nas células!
+3. Escolha o kernel conectando-se ao ambiente codespace (se estiver no codespace)
+4. Abra os exemplos indicados pelo professor, compreenda e atualize conforme a sua evolução
 
 ### Via Terminal
 
@@ -110,6 +110,14 @@ install.packages("nome_do_pacote")
 - [Documentação R](https://www.r-project.org/)
 - [IRkernel](https://irkernel.github.io/)
 - [GitHub Codespaces](https://github.com/features/codespaces)
+
+## Referências
+
+- Fávero, L. P.; Belfiore, P. Manual de Análise de Dados. 1ª Edição. Rio de Janeiro: Elsevier, 2017.
+- Book, Velleman, De Veaux; Stats: Modeling the World. Pearson, 2016.
+- Statistics: the art and science of learning from data; Agresti, Franklin, Klingenberg; 2007.
+- The Art of Statistics: How to Learn from Data; David Spiegelhalter.
+- Inteligência Computacional: Fundamentos e Aplicações; Alexandre Evsukoff; 2020.
 
 ## 🤝 Contribuindo
 
